@@ -53,7 +53,7 @@ users:
   - name: core
     ssh-authorized-keys:
     # - The following is the SSH public key, and should be changed based on your key generated pair
-      - ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAmAw3znssxYE9gPLxENbqX2gVAMHE9KhL9+73/wMhEVlePjP80+o5u9mvpTqDe/4I7ylVXZsj0rhsuOqZd4xk4p7LCYBVUT3x1zEtoz9KcyJdSbJCnWucpl30WDEyNshqV6ERHrzcF5t/mz4vrcVsiI7xV6/45hX7MrdNaNMLMnGXspAvo0RXDjX8P9rGYZfKt240jphPm3oTJ5AOjacfLq00QuUSX2f0UbI5SDXHyQTHy1V1A2MT6N2sf+Mu+DRzEeMiVP8+1boqKoJdh4dQawoVYu5KBPeNkBoml8iXr8bWp95Zs8XP3j7+M4y95BWmfGr9gu5FPzFxtKLEyFpnzw== rsa-key-20150822
+      - ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAvr+Mkqp1H0zvgU3Kf9MVmH1TSExdtQnP3xRYPfxgkwDqf7beY4RvYb8bzqx0HMRaGfloNv/R2RAmTtgZC7AsdaYFTxTZx9Egxaz5L2JCIxjkYffkkg1cnlguwH0XAai7R13gZRtUnS2ngcqT0zQZablxkqdcCv/qArMsCq/cuyY+dQ3Ceta1Vgi5GHyP4uOFEufaEikwmx3/RPygMgus2sv1JuDWVZApK1UJMspChMK0qH536MdRUixs9413kATXDRUjB59qXztlo0QW7Tuxjtte+QjGj+hViU1Kc/XSUYMKxDbBIL3Ysa5HzcEh1OdDQljKUQWdLVc5ySXZ0BR2Dw== rsa-key-20150829
   - groups:
       - sudo
       - docker
