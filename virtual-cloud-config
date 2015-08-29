@@ -1,0 +1,59 @@
+#cloud-config
+
+hostname: coreos01
+
+coreos:
+  etcd2:
+    # generate a new token for each unique cluster from https://discovery.etcd.io/new?size=3
+    # specify the initial size of your cluster with ?size=X
+    discovery: https://discovery.etcd.io/<token>
+    # multi-region and multi-cloud deployments need to use $public_ipv4
+    advertise-client-urls: http://$private_ipv4:2379,http://$private_ipv4:4001
+    initial-advertise-peer-urls: http://$private_ipv4:2380
+    # listen on both the official ports and the legacy ports
+    # legacy ports can be omitted if your application doesn't depend on them
+    listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
+    listen-peer-urls: http://$private_ipv4:2380,http://$private_ipv4:7001
+  units:
+    - name: etcd2.service
+      command: start
+    - name: fleet.service
+      command: start
+    - name: settimezone.service
+      command: start
+      content: |
+        [Unit]
+        # - The following sets the timezone to UTC
+        Description=Set the time zone
+
+        [Service]
+        ExecStart=/usr/bin/timedatectl set-timezone UTC
+        RemainAfterExit=yes
+        Type=oneshot
+    - name: systemd-timesyncd.service
+      command: stop
+      mask: true
+    - name: ntpd.service
+      command: start
+      enable: true
+
+write_files:
+  - path: /etc/ntp.conf
+    content: |
+      # - The following are NTP server addresses
+      server pool.ntp.org
+
+      # - Allow only time queries, at a limited rate.
+      # - Allow all local queries (IPv4, IPv6)
+      restrict default nomodify nopeer noquery limited kod
+      restrict 127.0.0.1
+      restrict [::1]
+
+users:
+  - name: core
+    ssh-authorized-keys:
+    # - The following is the SSH public key, and should be changed based on your key generated pair
+      - ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAmAw3znssxYE9gPLxENbqX2gVAMHE9KhL9+73/wMhEVlePjP80+o5u9mvpTqDe/4I7ylVXZsj0rhsuOqZd4xk4p7LCYBVUT3x1zEtoz9KcyJdSbJCnWucpl30WDEyNshqV6ERHrzcF5t/mz4vrcVsiI7xV6/45hX7MrdNaNMLMnGXspAvo0RXDjX8P9rGYZfKt240jphPm3oTJ5AOjacfLq00QuUSX2f0UbI5SDXHyQTHy1V1A2MT6N2sf+Mu+DRzEeMiVP8+1boqKoJdh4dQawoVYu5KBPeNkBoml8iXr8bWp95Zs8XP3j7+M4y95BWmfGr9gu5FPzFxtKLEyFpnzw== rsa-key-20150822
+  - groups:
+      - sudo
+      - docker
