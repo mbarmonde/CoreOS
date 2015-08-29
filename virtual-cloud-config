@@ -1,6 +1,6 @@
 #cloud-config
 
-hostname: coreos01
+hostname: coreos01v
 
 coreos:
   etcd2:
