@@ -1,6 +1,6 @@
 #cloud-config
 
-hostname: vmwcoreos01
+hostname: -CHANGE(SERVER NAME)-
 
 coreos:
   etcd2:
@@ -41,8 +41,8 @@ write_files:
   - path: /etc/ntp.conf
     content: |
       # - The following are NTP server addresses
-      server syn1511.beachhaze.local
-      server 10.0.1.10
+      server -CHANGE(TIME SERVER 1)-
+      server -CHANGE(TIME SERVER 2)-
 
       # - Allow only time queries, at a limited rate.
       # - Allow all local queries (IPv4, IPv6)
@@ -54,7 +54,7 @@ users:
   - name: core
     ssh-authorized-keys:
     # - The following is the SSH public key, and should be changed based on your key generated pair
-      - ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAgJILvoNoHCPABZn86bHm/v5IM7xhzMofkvZliF6dH9UHxXl2yToslZzUI5oktFCOJgSJgttecwDTcz/N3Tm9zXBPwGWU5PkDtJPkQXjunfXma8VDCEoErdnv/pCyeF6C1XymNYQMbLesHpCE+y7bB7KTG0sEGkJNqCxr6Ww3YiErR9l43GwvmHzThg5Z5RYCgJOAoLuPi2TFY3k2oA4vSWk8XpOUU76c/1M9j1tYWSHSBMFminH8S1Qin3p5mtbknDJ/mcRDpieHKrtgWsg5fvCJbLtNpetop7UgMl0AITKE7FIjTzvqyxPXz4KvkkHazqsiNVjobfWFgcxWEyQ3Xw== rsa-key-20150904
+      - -CHANGE(SSH KEY)-
   - groups:
       - sudo
       - docker
