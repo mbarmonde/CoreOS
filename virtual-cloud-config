@@ -1,6 +1,6 @@
 #cloud-config
 
-hostname: vmwcoreos01
+hostname: vmwcoreos0X
 
 coreos:
   etcd2:
